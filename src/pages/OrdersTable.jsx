@@ -361,31 +361,31 @@ export default function OrdersTable() {
       </div>
 
       {/* Orders Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
+      <div className="overflow-x-auto w-full">
+        <table className="w-full min-w-[600px] text-sm border-collapse">
           <thead className="border-b text-gray-500 text-left">
             <tr>
-              <th className="py-3">Last Order</th>
-              <th>Time</th>
-              <th>Name</th>
-              <th>Channel</th>
-              <th>Phone No</th>
-              <th>Assets</th>
-              <th>Extra</th>
-              <th>Price</th>
+              <th className="py-3 px-2">Last Order</th>
+              <th className="py-3 px-2">Time</th>
+              <th className="py-3 px-2">Name</th>
+              <th className="py-3 px-2">Channel</th>
+              <th className="py-3 px-2">Phone No</th>
+              <th className="py-3 px-2">Assets</th>
+              <th className="py-3 px-2">Extra</th>
+              <th className="py-3 px-2">Price</th>
             </tr>
           </thead>
           <tbody>
             {paginatedOrders.map((order, index) => (
               <tr key={index} className="border-b hover:bg-blue-50 transition">
-                <td className="py-3">{order.date}</td>
-                <td>{order.time}</td>
-                <td>{order.name}</td>
-                <td>{order.channel}</td>
-                <td>{order.phone}</td>
-                <td>{order.assets}</td>
-                <td>{order.extra}</td>
-                <td className="font-medium">{order.price}</td>
+                <td className="py-2 px-2">{order.date}</td>
+                <td className="py-2 px-2">{order.time}</td>
+                <td className="py-2 px-2">{order.name}</td>
+                <td className="py-2 px-2">{order.channel}</td>
+                <td className="py-2 px-2">{order.phone}</td>
+                <td className="py-2 px-2">{order.assets}</td>
+                <td className="py-2 px-2">{order.extra}</td>
+                <td className="py-2 px-2 font-medium">{order.price}</td>
               </tr>
             ))}
           </tbody>

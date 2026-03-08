@@ -143,33 +143,32 @@ export default function ConversationTable() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
+      <div className="overflow-x-auto w-full">
+        <table className="min-w-[600px] w-full text-sm border-collapse">
           <thead className="text-left text-gray-500 border-b">
             <tr>
-              <th className="py-3">Date</th>
-              <th>Channel</th>
-              <th>Duration</th>
-              <th>Messages</th>
-              <th>Summary</th>
-              <th>Status</th>
+              <th className="py-3 px-2">Date</th>
+              <th className="py-3 px-2">Channel</th>
+              <th className="py-3 px-2">Duration</th>
+              <th className="py-3 px-2">Messages</th>
+              <th className="py-3 px-2">Summary</th>
+              <th className="py-3 px-2">Status</th>
             </tr>
           </thead>
           <tbody>
             {paginatedData.map((item, index) => (
               <tr key={index} className="border-b hover:bg-blue-50 transition">
-                <td className="py-3">{item.date}</td>
-                <td>{item.channel}</td>
-                <td>{item.duration}</td>
-                <td>{item.messages}</td>
-                <td>{item.summary}</td>
-                <td>
+                <td className="py-2 px-2">{item.date}</td>
+                <td className="py-2 px-2">{item.channel}</td>
+                <td className="py-2 px-2">{item.duration}</td>
+                <td className="py-2 px-2">{item.messages}</td>
+                <td className="py-2 px-2">{item.summary}</td>
+                <td className="py-2 px-2">
                   <span
-                    className={`px-2 py-1 rounded-full text-sm font-medium ${
-                      item.status === "Completed"
+                    className={`px-2 py-1 rounded-full text-sm font-medium ${item.status === "Completed"
                         ? "bg-green-100 text-green-600"
                         : "bg-red-100 text-red-600"
-                    }`}
+                      }`}
                   >
                     {item.status}
                   </span>

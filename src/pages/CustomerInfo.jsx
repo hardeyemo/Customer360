@@ -17,7 +17,7 @@ export default function CustomerDetailsHeader() {
 
       {/* Optional Back Link */}
       <Link
-        to="/customers"
+        to="/"
         className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-medium"
       >
         <FiArrowLeft />

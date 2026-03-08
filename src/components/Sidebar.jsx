@@ -34,9 +34,9 @@ export default function Sidebar() {
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             {open && (
-              <div className="flex flex-col">
-                <h2 className="text-xl font-bold text-blue-600">Chatbot</h2>
-                <span className="text-blue-300 text-sm">Evka</span>
+              <div className="flex flex-col gap-0 m-0">
+                <h2 className="text-2xl font-bold text-blue-600">Chatbot</h2>
+                <span className="text-blue-300 text-xl font-extrabold">Evka</span>
               </div>
             )}
             <button
@@ -80,9 +80,9 @@ export default function Sidebar() {
 
       {/* Mobile Top Bar */}
       <div className="sm:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-white p-4 shadow-md">
-        <div>
+        <div className="flex flex-col gap-0 m-0">
           <h2 className="text-lg font-bold text-blue-600">Chatbot</h2>
-          <span className="text-blue-300 text-sm">Evka</span>
+          <span className="text-blue-300 text-sm font-extrabold">Evka</span>
         </div>
         <button onClick={() => setMobileMenu(true)}>
           <FiMenu size={24} className="text-blue-500" />
