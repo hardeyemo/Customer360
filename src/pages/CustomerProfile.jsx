@@ -383,99 +383,98 @@ const customers = [
         contactMethod: "App"
     }
 ];
+
+
 export default function CustomerProfile() {
-    const { id } = useParams();
-    const customer = customers.find((c) => c.id === Number(id));
+  const { id } = useParams();
+  const customer = customers.find((c) => c.id === Number(id));
 
-    if (!customer) return <div className="p-10 text-gray-500">Customer not found</div>;
+  if (!customer)
+    return <div className="p-6 text-gray-500 text-center">Customer not found</div>;
 
-    return (
-        <div className="bg-gray-50 p-6 min-h-screen space-y-10">
+  return (
+    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 space-y-8">
 
-            {/* Customer Info & Snapshot */}
-            <div className="flex flex-col lg:flex-row gap-6">
+      {/* Customer Info & Snapshot */}
+      <div className="flex flex-col lg:flex-row gap-6">
 
-                {/* Left: Customer Info */}
-                <div className="flex-1 bg-white rounded-xl border border-green-500 p-6 flex flex-col lg:flex-row gap-6">
+        {/* Left: Customer Info */}
+        <div className="flex-1 bg-white rounded-2xl shadow-md p-6 flex flex-col lg:flex-row gap-6">
+          {/* Main Info */}
+          <div className="flex-1 space-y-4">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 truncate">{customer.name}</h2>
+            <p className="text-gray-500 text-sm sm:text-base truncate">{customer.email}</p>
 
-                    {/* Main Info */}
-                    <div className="flex-1 space-y-4">
-                        <h2 className="text-2xl font-semibold text-gray-800">{customer.name}</h2>
-                        <p className="text-gray-500">{customer.email}</p>
-
-                        {/* Stats */}
-                        <div className="flex gap-4 mt-4">
-                            <StatCard label="Total Orders" value={customer.orders} />
-                            <StatCard label="Chat Sessions" value={customer.sessions} />
-                        </div>
-                    </div>
-
-                    {/* Divider + Details */}
-                    <div className="border-t lg:border-t-0 lg:border-l border-green-500 pt-4 lg:pt-0 pl-0 lg:pl-6 flex-1">
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                            <Info label="Status" value={customer.status} green={customer.status === "Active"} />
-                            <Info label="Member Since" value={customer.memberSince} />
-                            <Info label="Preferred Time" value={customer.preferredTime} />
-                            <Info label="Loyalty Points" value={customer.loyalty} highlight />
-                            <Info label="Total Spent" value={customer.totalSpent} />
-                            <Info label="Preferred Assets" value={customer.preferredAssets} />
-                            <Info label="Last Visit" value={customer.lastVisit} />
-                            <Info label="Contact Method" value={customer.contactMethod} />
-                            <Info label="Phone Number" value={customer.phone} />
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right: Snapshot */}
-                <div className="w-full lg:w-96 bg-white rounded-xl border border-green-500 p-6 flex flex-col justify-between">
-                    <div>
-                        <h3 className="font-semibold mb-3">360° Customer Snapshot</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                            {customer.name} has completed {customer.orders} orders and
-                            interacted with the chatbot {customer.sessions} times.
-                            This customer prefers communication via {customer.contactMethod}.
-                        </p>
-                    </div>
-                    <Link
-                        to="/snapshot"
-                        className="mt-6 text-center border border-green-500 text-indigo-600 py-2 rounded-full hover:bg-indigo-50 transition"
-                    >
-                        View Details
-                    </Link>
-                </div>
+            {/* Stats */}
+            <div className="flex flex-col sm:flex-row gap-3 mt-4">
+              <StatCard label="Total Orders" value={customer.orders} />
+              <StatCard label="Chat Sessions" value={customer.sessions} />
             </div>
+          </div>
 
-            {/* History */}
-            <div className="space-y-2">
-                <h2 className="text-xl font-semibold text-gray-800">Customer History</h2>
-                <p className="text-gray-500 text-sm">
-                    View conversation sessions and appointment history
-                </p>
+          {/* Divider + Details */}
+          <div className="border-t lg:border-t-0 lg:border-l border-gray-200 pt-4 lg:pt-0 lg:pl-6 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+              <Info label="Status" value={customer.status} green={customer.status === "Active"} />
+              <Info label="Member Since" value={customer.memberSince} />
+              <Info label="Preferred Time" value={customer.preferredTime} />
+              <Info label="Loyalty Points" value={customer.loyalty} highlight />
+              <Info label="Total Spent" value={customer.totalSpent} />
+              <Info label="Preferred Assets" value={customer.preferredAssets} />
+              <Info label="Last Visit" value={customer.lastVisit} />
+              <Info label="Contact Method" value={customer.contactMethod} />
+              <Info label="Phone Number" value={customer.phone} />
             </div>
-
-            <CustomerHistory />
+          </div>
         </div>
-    );
+
+        {/* Right: Snapshot */}
+        <div className="w-full lg:w-96 bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
+          <div>
+            <h3 className="font-semibold mb-3 text-gray-700">360° Customer Snapshot</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {customer.name} has completed {customer.orders} orders and interacted with the chatbot {customer.sessions} times.
+              This customer prefers communication via {customer.contactMethod}.
+            </p>
+          </div>
+          <Link
+            to="/snapshot"
+            className="mt-6 text-center border border-gray-300 text-gray-700 py-2 rounded-full hover:bg-gray-100 transition"
+          >
+            View Details
+          </Link>
+        </div>
+      </div>
+
+      {/* History */}
+      <div className="space-y-1">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800">Customer History</h2>
+        <p className="text-gray-500 text-sm">View conversation sessions and appointment history</p>
+      </div>
+
+      <CustomerHistory />
+    </div>
+  );
 }
 
 // Info component
 function Info({ label, value, green, highlight }) {
-    return (
-        <div>
-            <p className="text-gray-500 text-xs">{label}</p>
-            <p className={green ? "text-green-600 font-medium" : highlight ? "text-indigo-600 font-semibold" : "font-medium"}>
-                {value}
-            </p>
-        </div>
-    );
+  return (
+    <div>
+      <p className="text-gray-400 text-xs">{label}</p>
+      <p className={green ? "text-green-600 font-medium" : highlight ? "text-indigo-600 font-semibold" : "text-gray-800 font-medium"}>
+        {value}
+      </p>
+    </div>
+  );
 }
 
 // StatCard for orders/sessions
 function StatCard({ label, value }) {
-    return (
-        <div className="flex-1 border rounded-lg p-4 text-center bg-gray-50 hover:bg-gray-100 transition">
-            <p className="text-2xl font-semibold">{value}</p>
-            <p className="text-sm text-gray-500">{label}</p>
-        </div>
-    );
+  return (
+    <div className="flex-1 border rounded-lg p-4 text-center bg-gray-50 hover:bg-gray-100 transition">
+      <p className="text-2xl font-semibold text-gray-800">{value}</p>
+      <p className="text-sm text-gray-500">{label}</p>
+    </div>
+  );
 }

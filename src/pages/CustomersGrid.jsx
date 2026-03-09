@@ -14,7 +14,6 @@ const customers = [
   { id:8, name:"Noah Martinez", status:"Active", phone:"+31 6 22334455", email:"noahmartinez@gmail.com", orders:10, sessions:18, amount:"€1,900", lastActivity:"2024-01-21 / 13:30PM", snapshot:"Noah booked a massage session."},
   { id:9, name:"Ava Johnson", status:"Active", phone:"+31 6 88776655", email:"avajohnson@gmail.com", orders:13, sessions:22, amount:"€2,800", lastActivity:"2024-02-03 / 17:40PM", snapshot:"Ava prefers weekend bookings."},
   { id:10, name:"William Clark", status:"Active", phone:"+31 6 66554433", email:"williamclark@gmail.com", orders:7, sessions:10, amount:"€900", lastActivity:"2024-01-28 / 14:10PM", snapshot:"William uses the chatbot booking."},
-
   { id:11, name:"Isabella Hall", status:"Active", phone:"+31 6 77889900", email:"isabellah@gmail.com", orders:11, sessions:16, amount:"€1,600", lastActivity:"2024-02-02 / 11:00AM", snapshot:"Isabella books beauty treatments."},
   { id:12, name:"James Allen", status:"Inactive", phone:"+31 6 10101010", email:"jamesallen@gmail.com", orders:3, sessions:5, amount:"€200", lastActivity:"2023-10-10 / 12:00PM", snapshot:"James hasn't visited recently."},
   { id:13, name:"Charlotte Young", status:"Active", phone:"+31 6 20202020", email:"charlotte@gmail.com", orders:14, sessions:25, amount:"€3,000", lastActivity:"2024-02-04 / 15:20PM", snapshot:"Charlotte is a frequent customer."},

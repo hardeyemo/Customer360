@@ -104,7 +104,7 @@ export default function Sidebar() {
               <div className="flex items-center justify-between mb-8">
                 <div>
                   <h2 className="text-xl font-bold text-blue-600">Chatbot</h2>
-                <span className="text-blue-300 text-sm">Evka</span>
+                  <span className="text-blue-300 text-sm">Evka</span>
                 </div>
                 <button onClick={() => setMobileMenu(false)}>
                   <FiX size={24} className="text-blue-500" />
