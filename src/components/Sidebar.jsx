@@ -82,7 +82,7 @@ export default function Sidebar() {
       <div className="sm:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-white p-4 shadow-md">
         <div className="flex flex-col gap-0 m-0">
           <h2 className="text-lg font-bold text-blue-600">Chatbot</h2>
-          <span className="text-blue-300 text-sm font-extrabold">Evka</span>
+          <span className="text-blue-300 text-sm">Evka</span>
         </div>
         <button onClick={() => setMobileMenu(true)}>
           <FiMenu size={24} className="text-blue-500" />
@@ -99,7 +99,7 @@ export default function Sidebar() {
           />
 
           {/* Drawer */}
-          <div className="relative w-64 bg-white h-full shadow-lg p-6 flex flex-col justify-between transition-transform transform translate-x-0">
+          <div className="relative w-64 bg-white h-full shadow-lg  duration-300 p-6 flex flex-col justify-between transition-transform transform translate-x-0">
             <div>
               <div className="flex items-center justify-between mb-8">
                 <div>

@@ -287,129 +287,189 @@ const orders = [
   }
 ];
 
+
+
 export default function OrdersTable() {
   const [search, setSearch] = useState("");
-  const [channelFilter, setChannelFilter] = useState("All channel");
-  const [channelDropdown, setChannelDropdown] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("All Status");
+  const [statusDropdown, setStatusDropdown] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 5;
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
-  const channelOptions = ["All channel", "Whatsapp", "Website"];
+  const perPage = 7;
+
+  const statusOptions = ["All Status", "Completed", "Pending", "Cancelled"];
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
-      order.name.toLowerCase().includes(search.toLowerCase()) ||
-      order.assets.toLowerCase().includes(search.toLowerCase());
+      order.customer.toLowerCase().includes(search.toLowerCase()) ||
+      order.id.toLowerCase().includes(search.toLowerCase());
 
-    const matchesChannel =
-      channelFilter === "All channel" || order.channel === channelFilter;
+    const matchesStatus =
+      statusFilter === "All Status" || order.status === statusFilter;
 
-    return matchesSearch && matchesChannel;
+    return matchesSearch && matchesStatus;
   });
 
   const totalPages = Math.ceil(filteredOrders.length / perPage);
   const start = (currentPage - 1) * perPage;
   const paginatedOrders = filteredOrders.slice(start, start + perPage);
 
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "Completed":
+        return "bg-green-100 text-green-700";
+      case "Pending":
+        return "bg-yellow-100 text-yellow-700";
+      case "Cancelled":
+        return "bg-red-100 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
+  };
+
   return (
-    <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-sm">
-
-      {/* Search + Channel Filter */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
-
-        {/* Search */}
-        <div className="flex items-center gap-2 border rounded-lg px-3 py-2 w-full md:w-72 border-blue-300 bg-blue-50">
-          <FiSearch className="text-blue-400" />
-          <input
-            placeholder="Search Orders or Customers"
-            className="outline-none text-sm w-full bg-blue-50"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
-
-        {/* Channel Dropdown */}
-        <div className="relative">
-          <button
-            className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center justify-between w-36 bg-blue-50 hover:bg-blue-100 transition"
-            onClick={() => setChannelDropdown(!channelDropdown)}
-          >
-            {channelFilter} <IoChevronDown className="ml-2" />
-          </button>
-          {channelDropdown && (
-            <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow w-36 mt-1">
-              {channelOptions.map((channel) => (
-                <li
-                  key={channel}
-                  className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
-                  onClick={() => {
-                    setChannelFilter(channel);
-                    setChannelDropdown(false);
-                    setCurrentPage(1);
-                  }}
-                >
-                  {channel}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-      </div>
+    <div className="flex flex-col md:flex-row gap-6 p-6">
 
       {/* Orders Table */}
-      <div className="overflow-x-auto w-full">
-        <table className="w-full min-w-[600px] text-sm border-collapse">
-          <thead className="border-b text-gray-500 text-left">
-            <tr>
-              <th className="py-3 px-2">Last Order</th>
-              <th className="py-3 px-2">Time</th>
-              <th className="py-3 px-2">Name</th>
-              <th className="py-3 px-2">Channel</th>
-              <th className="py-3 px-2">Phone No</th>
-              <th className="py-3 px-2">Assets</th>
-              <th className="py-3 px-2">Extra</th>
-              <th className="py-3 px-2">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedOrders.map((order, index) => (
-              <tr key={index} className="border-b hover:bg-blue-50 transition">
-                <td className="py-2 px-2">{order.date}</td>
-                <td className="py-2 px-2">{order.time}</td>
-                <td className="py-2 px-2">{order.name}</td>
-                <td className="py-2 px-2">{order.channel}</td>
-                <td className="py-2 px-2">{order.phone}</td>
-                <td className="py-2 px-2">{order.assets}</td>
-                <td className="py-2 px-2">{order.extra}</td>
-                <td className="py-2 px-2 font-medium">{order.price}</td>
+      <div className="flex-1">
+        <h1 className="text-2xl font-semibold mb-1">Orders</h1>
+        <p className="text-gray-500 mb-4">Manage all customer orders</p>
+
+        {/* Search + Status Filter */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2 border rounded-lg px-3 py-2 w-full md:w-72 border-blue-300 bg-blue-50">
+            <FiSearch className="text-blue-400" />
+            <input
+              placeholder="Search by customer or order ID..."
+              className="outline-none text-sm w-full bg-blue-50"
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
+
+          <div className="relative">
+            <button
+              className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
+              onClick={() => setStatusDropdown(!statusDropdown)}
+            >
+              {statusFilter}
+              <IoChevronDown />
+            </button>
+
+            {statusDropdown && (
+              <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
+                {statusOptions.map((status) => (
+                  <li
+                    key={status}
+                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer"
+                    onClick={() => {
+                      setStatusFilter(status);
+                      setStatusDropdown(false);
+                      setCurrentPage(1);
+                    }}
+                  >
+                    {status}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="overflow-x-auto rounded-lg">
+          <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+            <thead className="bg-gray-50 text-gray-500 text-left text-sm sticky top-0 border-b">
+              <tr>
+                <th className="px-4 py-3">Order ID</th>
+                <th className="px-4 py-3">Customer</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Time</th>
+                <th className="px-4 py-3">Amount</th>
+                <th className="px-4 py-3">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paginatedOrders.map((order, index) => (
+                <tr
+                  key={order.id}
+                  className={`border-b hover:bg-blue-50 cursor-pointer ${
+                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  }`}
+                  onClick={() => setSelectedOrder(order)}
+                >
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.id}</td>
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.customer}</td>
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.date}</td>
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.time}</td>
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.amount}</td>
+                  <td className="px-4 py-3 text-sm">
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(order.status)}`}>
+                      {order.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {filteredOrders.length === 0 && <p className="text-center text-gray-400 mt-4">No orders found.</p>}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex justify-end items-center gap-3 mt-4">
+          <button
+            className="p-2 border rounded bg-blue-50 hover:bg-blue-100"
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          >
+            <IoChevronBack />
+          </button>
+          <span className="text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="p-2 border rounded bg-blue-50 hover:bg-blue-100"
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          >
+            <IoChevronForward />
+          </button>
+        </div>
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-end items-center gap-3 mt-4">
-        <button
-          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition"
-          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-        >
-          <IoChevronBack />
-        </button>
-        <span className="text-sm">
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition"
-          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-        >
-          <IoChevronForward />
-        </button>
-      </div>
+      {/* Customer Info / Snapshot Panel */}
+      {selectedOrder && (
+        <div className="md:w-1/3 bg-white rounded-xl shadow-md p-5 flex flex-col">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Client</h2>
+            <FiX
+              className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800"
+              onClick={() => setSelectedOrder(null)}
+            />
+          </div>
+          <p className="text-gray-700 font-medium">{selectedOrder.customer}</p>
+          <p className="text-gray-500 text-sm">{selectedOrder.email}</p>
+          <p className="text-gray-500 text-sm mb-2">{selectedOrder.phone}</p>
+
+          <div className="bg-purple-50 rounded-lg p-3 mt-4 text-sm text-gray-700">
+            <h3 className="font-semibold mb-1">360 Snapshot</h3>
+            <p>{selectedOrder.snapshot}</p>
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <span className="text-gray-500">Order Amount</span>
+            <span className="text-xl font-semibold">{selectedOrder.amount}</span>
+          </div>
+
+          <div className="flex justify-between items-center mt-2">
+            <span className="text-gray-500">Status</span>
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(selectedOrder.status)}`}>
+              {selectedOrder.status}
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

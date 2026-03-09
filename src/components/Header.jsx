@@ -3,7 +3,7 @@ import { GoSearch } from "react-icons/go";
 
 export default function Header({ search, setSearch }) {
   return (
-    <header className="border-b bg-white px-4 md:px-6 py-4 shadow-sm">
+    <header className="border-b bg-white px-5 md:px-6 py-4 shadow-sm">
 
       <div className="flex items-center justify-between gap-4">
 

@@ -6,10 +6,10 @@ export default function CustomerHistory() {
   const [tab, setTab] = useState("conversations");
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+    <div className=" bg-white overflow-auto p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-4  mb-6">
         <button
           onClick={() => setTab("conversations")}
           className={`px-4 py-2 rounded-lg border transition
@@ -31,8 +31,8 @@ export default function CustomerHistory() {
         </button>
       </div>
 
-      {/* Tab content */}
-      <div className="overflow-x-auto">
+      {/* Scrollable Table */}
+      <div className="overflow-auto">
         {tab === "conversations" && <ConversationTable />}
         {tab === "orders" && <OrdersTable />}
       </div>

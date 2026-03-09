@@ -227,7 +227,8 @@ import { FiSearch, FiX } from "react-icons/fi";
 ];
 
 
-export default function Order() {
+
+export default function OrdersTable() {
   const [search, setSearch] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
 
@@ -247,10 +248,11 @@ export default function Order() {
   };
 
   return (
-    <div className="p-6 flex flex-col md:flex-row gap-6">
+    <div className="flex flex-col md:flex-row gap-6 p-6">
+
       {/* Orders Table */}
       <div className="flex-1">
-        <h1 className="text-2xl font-semibold mb-2">Orders</h1>
+        <h1 className="text-2xl font-semibold mb-1">Orders</h1>
         <p className="text-gray-500 mb-4">Manage all customer orders</p>
 
         <div className="mb-4 flex items-center border-2 border-gray-300 rounded-lg px-3 py-2">
@@ -258,7 +260,7 @@ export default function Order() {
           <input
             type="text"
             placeholder="Search by customer or order ID..."
-            className="flex-1  px-3 py-2 outline-none text-sm focus:outline-none "
+            className="flex-1 px-3 py-2 outline-none text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -266,21 +268,21 @@ export default function Order() {
 
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
-            <thead className="bg-gray-50">
+            <thead className="bg-gray-50 text-gray-500 text-left text-sm">
               <tr>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Order ID</th>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Customer</th>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Date</th>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Time</th>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Amount</th>
-                <th className="text-left px-4 py-3 text-gray-500 text-sm">Status</th>
+                <th className="px-4 py-3">Order ID</th>
+                <th className="px-4 py-3">Customer</th>
+                <th className="px-4 py-3">Date</th>
+                <th className="px-4 py-3">Time</th>
+                <th className="px-4 py-3">Amount</th>
+                <th className="px-4 py-3">Status</th>
               </tr>
             </thead>
             <tbody>
-              {filteredOrders.map((order) => (
+              {filteredOrders.map((order, index) => (
                 <tr
                   key={order.id}
-                  className="border-b hover:bg-gray-50 cursor-pointer"
+                  className={`border-b hover:bg-blue-50 transition ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} cursor-pointer`}
                   onClick={() => setSelectedOrder(order)}
                 >
                   <td className="px-4 py-3 text-sm text-gray-700">{order.id}</td>
@@ -306,7 +308,10 @@ export default function Order() {
         <div className="md:w-1/3 bg-white rounded-xl shadow-md p-5 flex flex-col">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Client</h2>
-            <FiX className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800" onClick={() => setSelectedOrder(null)} />
+            <FiX
+              className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800"
+              onClick={() => setSelectedOrder(null)}
+            />
           </div>
           <p className="text-gray-700 font-medium">{selectedOrder.customer}</p>
           <p className="text-gray-500 text-sm">{selectedOrder.email}</p>
@@ -328,7 +333,6 @@ export default function Order() {
               {selectedOrder.status}
             </span>
           </div>
-
         </div>
       )}
     </div>

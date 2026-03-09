@@ -20,7 +20,7 @@ export default function DashboardLayout() {
         <Header search={search} setSearch={setSearch} />
 
         {/* Page Content */}
-        <main className="overflow-y-auto p-6">
+        <main className="overflow-y-auto ">
 
           {/* Send search to pages */}
           <Outlet context={{ search }} />

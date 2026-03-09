@@ -37,13 +37,14 @@ const data = [
   { date: "Apr 29, 2023", channel: "Website", duration: "9 mins", messages: 5, summary: "Booking confirmation message", status: "Completed" }
 ];
 
+
+
 export default function ConversationTable() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Status");
   const [channelFilter, setChannelFilter] = useState("All Channel");
   const [statusDropdown, setStatusDropdown] = useState(false);
   const [channelDropdown, setChannelDropdown] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 7;
 
@@ -69,10 +70,11 @@ export default function ConversationTable() {
   const paginatedData = filteredData.slice(start, start + perPage);
 
   return (
-    <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-sm">
+    <div className="overflow-x-auto bg-white rounded-lg shadow-sm p-4">
 
       {/* Search + Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+
         {/* Search */}
         <div className="flex items-center gap-2 border rounded-lg px-3 py-2 w-full md:w-72 border-blue-300 bg-blue-50">
           <FiSearch className="text-blue-400" />
@@ -80,26 +82,31 @@ export default function ConversationTable() {
             placeholder="Search conversations"
             className="outline-none text-sm w-full bg-blue-50"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
           />
         </div>
 
-        {/* Dropdown Filters */}
+        {/* Filters */}
         <div className="flex gap-3">
-          {/* Status Dropdown */}
+
+          {/* Status */}
           <div className="relative">
             <button
-              className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center justify-between w-36 bg-blue-50 hover:bg-blue-100 transition"
+              className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
               onClick={() => setStatusDropdown(!statusDropdown)}
             >
-              {statusFilter} <IoChevronDown className="ml-2" />
+              {statusFilter}
+              <IoChevronDown />
             </button>
             {statusDropdown && (
-              <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow w-36 mt-1">
+              <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
                 {statusOptions.map((status) => (
                   <li
                     key={status}
-                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer"
+                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
                     onClick={() => {
                       setStatusFilter(status);
                       setStatusDropdown(false);
@@ -113,20 +120,21 @@ export default function ConversationTable() {
             )}
           </div>
 
-          {/* Channel Dropdown */}
+          {/* Channel */}
           <div className="relative">
             <button
-              className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center justify-between w-36 bg-blue-50 hover:bg-blue-100 transition"
+              className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
               onClick={() => setChannelDropdown(!channelDropdown)}
             >
-              {channelFilter} <IoChevronDown className="ml-2" />
+              {channelFilter}
+              <IoChevronDown />
             </button>
             {channelDropdown && (
-              <ul className="absolute z-10 bg-white border border-gray-200 rounded shadow w-36 mt-1">
+              <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
                 {channelOptions.map((channel) => (
                   <li
                     key={channel}
-                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer"
+                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
                     onClick={() => {
                       setChannelFilter(channel);
                       setChannelDropdown(false);
@@ -139,36 +147,38 @@ export default function ConversationTable() {
               </ul>
             )}
           </div>
+
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto w-full">
-        <table className="min-w-[600px] w-full text-sm border-collapse">
-          <thead className="text-left text-gray-500 border-b">
+      <div className="overflow-x-scroll">
+        <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+          <thead className="border-b text-gray-500 text-left text-sm">
             <tr>
-              <th className="py-3 px-2">Date</th>
-              <th className="py-3 px-2">Channel</th>
-              <th className="py-3 px-2">Duration</th>
-              <th className="py-3 px-2">Messages</th>
-              <th className="py-3 px-2">Summary</th>
-              <th className="py-3 px-2">Status</th>
+              <th className="py-3 px-4">Date</th>
+              <th className="px-4">Channel</th>
+              <th className="px-4">Duration</th>
+              <th className="px-4">Messages</th>
+              <th className="px-4">Summary</th>
+              <th className="px-4">Status</th>
             </tr>
           </thead>
           <tbody>
             {paginatedData.map((item, index) => (
-              <tr key={index} className="border-b hover:bg-blue-50 transition">
-                <td className="py-2 px-2">{item.date}</td>
-                <td className="py-2 px-2">{item.channel}</td>
-                <td className="py-2 px-2">{item.duration}</td>
-                <td className="py-2 px-2">{item.messages}</td>
-                <td className="py-2 px-2">{item.summary}</td>
-                <td className="py-2 px-2">
+              <tr key={index} className="border-b hover:bg-blue-50 transition even:bg-gray-50">
+                <td className="py-3 px-4 whitespace-nowrap">{item.date}</td>
+                <td className="px-4 whitespace-nowrap">{item.channel}</td>
+                <td className="px-4 whitespace-nowrap">{item.duration}</td>
+                <td className="px-4 whitespace-nowrap">{item.messages}</td>
+                <td className="px-4">{item.summary}</td>
+                <td className="px-4">
                   <span
-                    className={`px-2 py-1 rounded-full text-sm font-medium ${item.status === "Completed"
+                    className={`px-2 py-1 rounded text-xs ${
+                      item.status === "Completed"
                         ? "bg-green-100 text-green-600"
                         : "bg-red-100 text-red-600"
-                      }`}
+                    }`}
                   >
                     {item.status}
                   </span>
@@ -182,8 +192,9 @@ export default function ConversationTable() {
       {/* Pagination */}
       <div className="flex justify-end items-center gap-3 mt-4">
         <button
-          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition"
+          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition disabled:opacity-50"
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+          disabled={currentPage === 1}
         >
           <IoChevronBack />
         </button>
@@ -191,12 +202,14 @@ export default function ConversationTable() {
           Page {currentPage} of {totalPages}
         </span>
         <button
-          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition"
+          className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition disabled:opacity-50"
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+          disabled={currentPage === totalPages}
         >
           <IoChevronForward />
         </button>
       </div>
+
     </div>
   );
 }
