@@ -26,7 +26,7 @@ const CustomerCard = ({ customer }) => {
     };
 
     return (
-        <div className="relative bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between space-y-6 hover:shadow-lg transition-shadow duration-300 w-full sm:w-auto">
+        <div className="relative bg-white rounded-2xl shadow-md p-4 flex flex-col justify-between space-y-6 hover:shadow-lg transition-shadow duration-300 w-full sm:w-auto">
 
             {/* 3-dot menu for mobile (top-right) */}
             <div className="absolute top-4 right-4 sm:hidden" ref={dropdownRef}>

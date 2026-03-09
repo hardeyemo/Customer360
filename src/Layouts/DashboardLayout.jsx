@@ -9,24 +9,15 @@ export default function DashboardLayout() {
 
   return (
     <div className="flex h-screen bg-white">
-
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col">
 
-        {/* Header */}
         <Header search={search} setSearch={setSearch} />
 
-        {/* Page Content */}
-        <main className="overflow-y-auto ">
-
-          {/* Send search to pages */}
+        <main className=" ">
           <Outlet context={{ search }} />
-
         </main>
-
       </div>
 
     </div>

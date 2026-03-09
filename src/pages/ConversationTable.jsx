@@ -1,6 +1,8 @@
+
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoChevronBack, IoChevronForward, IoChevronDown } from "react-icons/io5";
+
 
 const data = [
   { date: "Apr 12, 2023", channel: "WhatsApp", duration: "62 mins", messages: 9, summary: "Booking confirmation for Friday 3 PM", status: "Ended" },
@@ -55,13 +57,10 @@ export default function ConversationTable() {
     const matchesSearch =
       item.summary.toLowerCase().includes(search.toLowerCase()) ||
       item.channel.toLowerCase().includes(search.toLowerCase());
-
     const matchesStatus =
       statusFilter === "All Status" || item.status === statusFilter;
-
     const matchesChannel =
       channelFilter === "All Channel" || item.channel === channelFilter;
-
     return matchesSearch && matchesStatus && matchesChannel;
   });
 
@@ -70,7 +69,7 @@ export default function ConversationTable() {
   const paginatedData = filteredData.slice(start, start + perPage);
 
   return (
-    <div className="overflow-x-auto bg-white rounded-lg shadow-sm p-4">
+    <div className="bg-white rounded-lg shadow-sm p-4">
 
       {/* Search + Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
@@ -82,24 +81,19 @@ export default function ConversationTable() {
             placeholder="Search conversations"
             className="outline-none text-sm w-full bg-blue-50"
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
+            onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
           />
         </div>
 
         {/* Filters */}
-        <div className="flex gap-3">
-
+        <div className="flex gap-3 flex-wrap">
           {/* Status */}
           <div className="relative">
             <button
               className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
               onClick={() => setStatusDropdown(!statusDropdown)}
             >
-              {statusFilter}
-              <IoChevronDown />
+              {statusFilter} <IoChevronDown />
             </button>
             {statusDropdown && (
               <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
@@ -107,11 +101,7 @@ export default function ConversationTable() {
                   <li
                     key={status}
                     className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
-                    onClick={() => {
-                      setStatusFilter(status);
-                      setStatusDropdown(false);
-                      setCurrentPage(1);
-                    }}
+                    onClick={() => { setStatusFilter(status); setStatusDropdown(false); setCurrentPage(1); }}
                   >
                     {status}
                   </li>
@@ -126,8 +116,7 @@ export default function ConversationTable() {
               className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
               onClick={() => setChannelDropdown(!channelDropdown)}
             >
-              {channelFilter}
-              <IoChevronDown />
+              {channelFilter} <IoChevronDown />
             </button>
             {channelDropdown && (
               <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
@@ -135,11 +124,7 @@ export default function ConversationTable() {
                   <li
                     key={channel}
                     className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
-                    onClick={() => {
-                      setChannelFilter(channel);
-                      setChannelDropdown(false);
-                      setCurrentPage(1);
-                    }}
+                    onClick={() => { setChannelFilter(channel); setChannelDropdown(false); setCurrentPage(1); }}
                   >
                     {channel}
                   </li>
@@ -147,13 +132,12 @@ export default function ConversationTable() {
               </ul>
             )}
           </div>
-
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-scroll">
-        <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full md:w-11/12 lg:w-4/5 xl:w-3/4 bg-white rounded-lg shadow-md">
           <thead className="border-b text-gray-500 text-left text-sm">
             <tr>
               <th className="py-3 px-4">Date</th>
@@ -190,7 +174,7 @@ export default function ConversationTable() {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-end items-center gap-3 mt-4">
+      <div className="flex justify-end items-center gap-3 mt-4 flex-wrap">
         <button
           className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition disabled:opacity-50"
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -209,7 +193,6 @@ export default function ConversationTable() {
           <IoChevronForward />
         </button>
       </div>
-
     </div>
   );
 }

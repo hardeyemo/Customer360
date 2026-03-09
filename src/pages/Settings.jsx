@@ -1,11 +1,8 @@
 export default function CustomerSettings() {
   return (
-    <div className="p-6 md:p-8 bg-gray-50 min-h-screen">
+    <div className="p-3 md:p-5 bg-gray-50 min-h-screen">
 
       {/* Page title */}
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-        Customer Settings
-      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 

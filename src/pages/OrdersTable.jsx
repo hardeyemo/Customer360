@@ -316,10 +316,9 @@ export default function OrdersTable() {
   const paginatedOrders = filteredOrders.slice(start, start + perPage);
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 p-6">
+    <div className="flex flex-col md:flex-row gap-6 ">
       {/* Orders Table */}
       <div className="flex-1">
-        <h1 className="text-2xl font-semibold mb-1">Orders</h1>
         <p className="text-gray-500 mb-4">Manage all customer orders</p>
 
         {/* Search + Filter */}

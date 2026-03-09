@@ -3,7 +3,7 @@ import { FiArrowLeft } from "react-icons/fi";
 
 export default function CustomerDetailsHeader() {
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="bg-white p-4 rounded-xl shadow-sm flex flex-col md:flex-col md:items-center md:justify-between gap-4">
 
       {/* Title & Subtitle */}
       <div>
@@ -16,13 +16,13 @@ export default function CustomerDetailsHeader() {
       </div>
 
       {/* Optional Back Link */}
-      <Link
+      {/* <Link
         to="/"
         className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-medium"
       >
         <FiArrowLeft />
         Back to Customers
-      </Link>
+      </Link> */}
 
     </div>
   );
