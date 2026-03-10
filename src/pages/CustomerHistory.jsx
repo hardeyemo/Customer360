@@ -1,3 +1,4 @@
+// CustomerHistory.jsx
 import { useState } from "react";
 import ConversationTable from "./ConversationTable";
 import OrdersTable from "./OrdersTable";
@@ -7,7 +8,6 @@ export default function CustomerHistory() {
 
   return (
     <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow w-full">
-
       {/* Tabs */}
       <div className="flex flex-wrap gap-4 mb-6">
         <button
@@ -36,7 +36,6 @@ export default function CustomerHistory() {
         {tab === "conversations" && <ConversationTable />}
         {tab === "orders" && <OrdersTable />}
       </div>
-
     </div>
   );
 }

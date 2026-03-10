@@ -69,7 +69,7 @@ export default function ConversationTable() {
   const paginatedData = filteredData.slice(start, start + perPage);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
+    <div className="bg-white rounded-lg shadow-sm ">
 
       {/* Search + Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
@@ -137,26 +137,26 @@ export default function ConversationTable() {
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full md:w-11/12 lg:w-4/5 xl:w-3/4 bg-white rounded-lg shadow-md">
+        <table className="min-w-full md:w-[1000px] bg-white rounded-lg shadow-md">
           <thead className="border-b text-gray-500 text-left text-sm">
             <tr>
-              <th className="py-3 px-4">Date</th>
-              <th className="px-4">Channel</th>
-              <th className="px-4">Duration</th>
-              <th className="px-4">Messages</th>
-              <th className="px-4">Summary</th>
-              <th className="px-4">Status</th>
+              <th className="py-2 px-8 ">Date</th>
+              <th className="px-3 py-4">Channel</th>
+              <th className="px-3 py-4">Duration</th>
+              <th className="px-3 py-4">Messages</th>
+              <th className="px-3 py-4">Summary</th>
+              <th className="px-3 py-4">Status</th>
             </tr>
           </thead>
           <tbody>
             {paginatedData.map((item, index) => (
-              <tr key={index} className="border-b hover:bg-blue-50 transition even:bg-gray-50">
-                <td className="py-3 px-4 whitespace-nowrap">{item.date}</td>
-                <td className="px-4 whitespace-nowrap">{item.channel}</td>
-                <td className="px-4 whitespace-nowrap">{item.duration}</td>
-                <td className="px-4 whitespace-nowrap">{item.messages}</td>
-                <td className="px-4">{item.summary}</td>
-                <td className="px-4">
+              <tr key={index} className="border-b hover:bg-blue-50  transition even:bg-gray-50">
+                <td className="py-3 px-4 text-sm text-gray-700">{item.date}</td>
+                <td className="px-4 py-3 txt-gray-700 text-sm">{item.channel}</td>
+                <td className="px-4 text-sm py-3 text-gray-700">{item.duration}</td>
+                <td className="px-4 text-sm py-3 text-gray-700">{item.messages}</td>
+                <td className="px-4 text-sm py-3 text-gray-700">{item.summary}</td>
+                <td className="px-4 text-sm text-gray-700 py-3">
                   <span
                     className={`px-2 py-1 rounded text-xs ${
                       item.status === "Completed"

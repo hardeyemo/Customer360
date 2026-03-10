@@ -373,7 +373,6 @@ export default function OrdersTable() {
                 <th className="px-4 py-3">Last Orders</th> {/* Updated */}
                 <th className="px-4 py-3">Time</th>
                 <th className="px-4 py-3">Name</th>
-                <th className="px-4 py-3">Price</th>
                 <th className="px-4 py-3">Channel</th>
                 <th className="px-4 py-3">Phone</th>
                 <th className="px-4 py-3">Assets</th>
@@ -393,7 +392,6 @@ export default function OrdersTable() {
                   <td className="px-4 py-3 text-sm text-gray-700">{order.lastOrders}</td> {/* Updated */}
                   <td className="px-4 py-3 text-sm text-gray-700">{order.time}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.name}</td>
-                  <td className="px-4 py-3 text-sm text-gray-700">{order.price}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.channel}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.phone}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.assets}</td>
