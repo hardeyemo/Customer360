@@ -22,8 +22,6 @@ export default function Snapshot({ onClose }) {
     const newMsg = { id: Date.now(), sender: "client", text: input };
     setMessages(prev => [...prev, newMsg]);
     setInput("");
-
-    // Simulate AI response
     setTimeout(() => {
       const aiReply = {
         id: Date.now() + 1,
@@ -38,7 +36,6 @@ export default function Snapshot({ onClose }) {
     setEditingId(msg.id);
     setEditingText(msg.text);
   };
-
   const saveEdit = (id) => {
     if (!editingText.trim()) return;
     setMessages(messages.map(msg => msg.id === id ? { ...msg, text: editingText } : msg));
@@ -61,8 +58,6 @@ export default function Snapshot({ onClose }) {
 
   return (
     <div className="absolute top-0 right-0 h-screen w-full md:w-96 bg-white shadow-xl flex flex-col">
-      
-      {/* Header */}
       <div className="flex justify-between items-center p-4 border-b">
         <div>
           <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -78,7 +73,6 @@ export default function Snapshot({ onClose }) {
         </div>
       </div>
 
-      {/* AI Summary */}
       <div className="bg-indigo-50 rounded-lg p-4 m-4 text-gray-700">
         <div className="flex justify-between items-center mb-2">
           <h3 className="font-semibold text-sm">AI Summary</h3>
@@ -92,7 +86,6 @@ export default function Snapshot({ onClose }) {
         </p>
       </div>
 
-      {/* Remarks */}
       <div className="px-4 text-sm text-gray-700 border-b pb-3">
         <p className="text-xs text-gray-400">Remark 1 · 24 May 2025 | 14:24PM</p>
         <p className="mt-1">
@@ -100,7 +93,6 @@ export default function Snapshot({ onClose }) {
         </p>
       </div>
 
-      {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map(msg => (
           <div
@@ -142,8 +134,6 @@ export default function Snapshot({ onClose }) {
         ))}
         <div ref={chatEndRef} />
       </div>
-
-      {/* Input */}
       <div className="flex items-center gap-2 p-4 border-t">
         <input
           value={input}

@@ -43,7 +43,6 @@ export default function Conversations() {
   const [search, setSearch] = useState("");
   const messagesEndRef = useRef(null);
 
-  // Scroll to bottom when messages update
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, activeChat]);
@@ -68,7 +67,6 @@ export default function Conversations() {
       )
     );
 
-    // Simulate AI response with a random message after 0.5-1s delay
     setTimeout(() => {
       const aiMessage = {
         from: "ai",
@@ -100,7 +98,6 @@ export default function Conversations() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col md:flex-row">
 
-      {/* Conversation List */}
       <div className="w-full md:w-1/3 bg-white border-r flex flex-col">
         <div className="p-4 border-b">
           <input
@@ -129,7 +126,6 @@ export default function Conversations() {
         </div>
       </div>
 
-      {/* Chat Window */}
       <div className="flex flex-col flex-1">
         <div className="bg-white p-4 border-b">
           <h3 className="font-semibold">{activeChat.name}</h3>

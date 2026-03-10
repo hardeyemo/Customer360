@@ -32,56 +32,34 @@ export default function CustomersGrid() {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 
-  // Filtered customers
   const filteredCustomers = customers.filter((customer) =>
     customer.name.toLowerCase().includes(search.toLowerCase()) ||
-    customer.email.toLowerCase().includes(search.toLowerCase())
-  );
+    customer.email.toLowerCase().includes(search.toLowerCase()));
 
   const totalPages = Math.ceil(filteredCustomers.length / cardsPerPage);
-
   const indexOfLast = currentPage * cardsPerPage;
   const indexOfFirst = indexOfLast - cardsPerPage;
   const currentCustomers = filteredCustomers.slice(indexOfFirst, indexOfLast);
 
-  // Scroll to top when page changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [currentPage]);
+}, [currentPage]);
 
   return (
     <div className="mt-6 space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> {currentCustomers.map((customer) => ( <CustomerCard key={customer.id} customer={customer} /> ))}</div>
 
-      {/* Customers Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {currentCustomers.map((customer) => (
-          <CustomerCard key={customer.id} customer={customer} />
-        ))}
-      </div>
-
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-end items-center gap-2 flex-wrap">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(p => p - 1)}
-            className="w-10 h-10 flex items-center justify-center border rounded-lg hover:bg-gray-100 disabled:opacity-40"
-          >
-            <FiChevronLeft />
+          <button disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)}
+            className="w-10 h-10 flex items-center justify-center border rounded-lg hover:bg-gray-100 disabled:opacity-40"> <FiChevronLeft />
           </button>
 
           {[...Array(totalPages)].map((_, i) => {
             const page = i + 1;
             return (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`w-10 h-10 rounded-lg border
-                  ${currentPage === page
-                    ? "bg-purple-500 text-white border-purple-500"
-                    : "hover:bg-gray-100"}`}
-              >
-                {page}
+              <button key={page} onClick={() => setCurrentPage(page)} className={`w-10 h-10 rounded-lg border ${currentPage === page
+                    ? "bg-purple-500 text-white border-purple-500" : "hover:bg-gray-100"}`} > {page}
               </button>
             );
           })}

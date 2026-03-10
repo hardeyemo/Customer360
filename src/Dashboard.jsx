@@ -6,10 +6,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col md:flex-row min-h-screen  md:p-8 gap-6">
 
-      {/* Main content */}
       <div className="flex-1 rounded-2xl shadow-md p-6 flex flex-col gap-6">
-
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
           <div>
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">Customers</h1>
@@ -21,13 +18,8 @@ export default function Dashboard() {
             <FaArrowDown className="text-gray-500" />
           </div>
         </div>
-
-        {/* Stats Section */}
         <Stats />
-
-        {/* Customers Grid */}
         <CustomersGrid />
-
       </div>
     </div>
   );

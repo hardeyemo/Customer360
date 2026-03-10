@@ -13,27 +13,17 @@ import Conversations from "./pages/Conversation";
 export default function App() {
   return (
     <BrowserRouter>
-
       <Routes>
-
         <Route element={<DashboardLayout />}>
-
           <Route path="/" element={<Dashboard />} />
-
           <Route path="/snapshot" element={<Snapshot />} />
           <Route path="/conversation" element={<Conversations />} />
-
           <Route path="/customerDetails" element={<CustomerDetails />} />
           <Route path="/order" element={<Order />} />
           <Route path="/settings" element={<Settings />} />
-
-
           <Route path="/customer/:id" element={<CustomerProfile />} />
-
         </Route>
-
       </Routes>
-
     </BrowserRouter>
   );
 }

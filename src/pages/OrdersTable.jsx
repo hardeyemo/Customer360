@@ -2,10 +2,6 @@ import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoChevronBack, IoChevronForward, IoChevronDown } from "react-icons/io5";
 
-
-
-
-
 const orders = [
   {
     lastOrders: "Apr 12, 2023",
@@ -298,8 +294,6 @@ export default function OrdersTable() {
 
   const perPage = 7;
   const statusOptions = ["All Channels", "Whatsapp", "Website"];
-
-  // Filter orders based on search and channel
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -314,14 +308,10 @@ export default function OrdersTable() {
   const totalPages = Math.ceil(filteredOrders.length / perPage);
   const start = (currentPage - 1) * perPage;
   const paginatedOrders = filteredOrders.slice(start, start + perPage);
-
   return (
     <div className="flex flex-col md:flex-row gap-6 ">
-      {/* Orders Table */}
       <div className="flex-1">
         <p className="text-gray-500 mb-4">Manage all customer orders</p>
-
-        {/* Search + Filter */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-2 border rounded-lg px-3 py-2 w-full md:w-72 border-blue-300 bg-blue-50">
             <FiSearch className="text-blue-400" />
@@ -332,15 +322,13 @@ export default function OrdersTable() {
               onChange={(e) => {
                 setSearch(e.target.value);
                 setCurrentPage(1);
-              }}
-            />
+              }} />
           </div>
 
           <div className="relative">
             <button
               className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
-              onClick={() => setStatusDropdown(!statusDropdown)}
-            >
+              onClick={() => setStatusDropdown(!statusDropdown)}  >
               {statusFilter}
               <IoChevronDown />
             </button>
@@ -355,8 +343,7 @@ export default function OrdersTable() {
                       setStatusFilter(status);
                       setStatusDropdown(false);
                       setCurrentPage(1);
-                    }}
-                  >
+                    }} >
                     {status}
                   </li>
                 ))}
@@ -364,13 +351,11 @@ export default function OrdersTable() {
             )}
           </div>
         </div>
-
-        {/* Table */}
         <div className="overflow-x-auto rounded-lg">
           <table className="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
             <thead className=" text-gray-500 text-left text-sm sticky top-0 border-b">
               <tr>
-                <th className="px-4 py-3">Last Orders</th> {/* Updated */}
+                <th className="px-4 py-3">Last Orders</th>
                 <th className="px-4 py-3">Time</th>
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Channel</th>
@@ -382,14 +367,9 @@ export default function OrdersTable() {
             </thead>
             <tbody>
               {paginatedOrders.map((order, index) => (
-                <tr
-                  key={index}
-                  className={`border-b hover:bg-blue-50 cursor-pointer ${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  }`}
-                  onClick={() => setSelectedOrder(order)}
-                >
-                  <td className="px-4 py-3 text-sm text-gray-700">{order.lastOrders}</td> {/* Updated */}
+                <tr key={index} className={`border-b hover:bg-blue-50 cursor-pointer ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                  onClick={() => setSelectedOrder(order)}>
+                  <td className="px-4 py-3 text-sm text-gray-700">{order.lastOrders}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.time}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.name}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.channel}</td>
@@ -406,8 +386,6 @@ export default function OrdersTable() {
             <p className="text-center text-gray-400 mt-4">No orders found.</p>
           )}
         </div>
-
-        {/* Pagination */}
         <div className="flex justify-end items-center gap-3 mt-4">
           <button
             className="p-2 border rounded bg-blue-50 hover:bg-blue-100"
@@ -426,16 +404,11 @@ export default function OrdersTable() {
           </button>
         </div>
       </div>
-
-      {/* Customer Snapshot Panel */}
       {selectedOrder && (
         <div className="md:w-1/3 bg-white rounded-xl shadow-md p-5 flex flex-col">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Client Info</h2>
-            <FiX
-              className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800"
-              onClick={() => setSelectedOrder(null)}
-            />
+            <FiX className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800" onClick={() => setSelectedOrder(null)} />
           </div>
           <p className="text-gray-700 font-medium">{selectedOrder.name}</p>
           <p className="text-gray-500 text-sm">{selectedOrder.phone}</p>

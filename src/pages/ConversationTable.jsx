@@ -1,8 +1,6 @@
-
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IoChevronBack, IoChevronForward, IoChevronDown } from "react-icons/io5";
-
 
 const data = [
   { date: "Apr 12, 2023", channel: "WhatsApp", duration: "62 mins", messages: 9, summary: "Booking confirmation for Friday 3 PM", status: "Ended" },
@@ -39,8 +37,6 @@ const data = [
   { date: "Apr 29, 2023", channel: "Website", duration: "9 mins", messages: 5, summary: "Booking confirmation message", status: "Completed" }
 ];
 
-
-
 export default function ConversationTable() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Status");
@@ -71,10 +67,8 @@ export default function ConversationTable() {
   return (
     <div className="bg-white rounded-lg shadow-sm ">
 
-      {/* Search + Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
 
-        {/* Search */}
         <div className="flex items-center gap-2 border rounded-lg px-3 py-2 w-full md:w-72 border-blue-300 bg-blue-50">
           <FiSearch className="text-blue-400" />
           <input
@@ -85,9 +79,7 @@ export default function ConversationTable() {
           />
         </div>
 
-        {/* Filters */}
         <div className="flex gap-3 flex-wrap">
-          {/* Status */}
           <div className="relative">
             <button
               className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
@@ -110,7 +102,6 @@ export default function ConversationTable() {
             )}
           </div>
 
-          {/* Channel */}
           <div className="relative">
             <button
               className="border rounded-full px-4 py-2 text-sm border-blue-300 flex items-center w-36 justify-between bg-blue-50"
@@ -121,13 +112,8 @@ export default function ConversationTable() {
             {channelDropdown && (
               <ul className="absolute z-10 bg-white border rounded shadow w-36 mt-1">
                 {channelOptions.map((channel) => (
-                  <li
-                    key={channel}
-                    className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
-                    onClick={() => { setChannelFilter(channel); setChannelDropdown(false); setCurrentPage(1); }}
-                  >
-                    {channel}
-                  </li>
+                  <li key={channel} className="px-4 py-2 hover:bg-blue-50 cursor-pointer transition"
+                    onClick={() => { setChannelFilter(channel); setChannelDropdown(false); setCurrentPage(1); }} >  {channel}  </li>
                 ))}
               </ul>
             )}
@@ -135,7 +121,6 @@ export default function ConversationTable() {
         </div>
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full md:w-[1000px] bg-white rounded-lg shadow-md">
           <thead className="border-b text-gray-500 text-left text-sm">
@@ -158,12 +143,8 @@ export default function ConversationTable() {
                 <td className="px-4 text-sm py-3 text-gray-700">{item.summary}</td>
                 <td className="px-4 text-sm text-gray-700 py-3">
                   <span
-                    className={`px-2 py-1 rounded text-xs ${
-                      item.status === "Completed"
-                        ? "bg-green-100 text-green-600"
-                        : "bg-red-100 text-red-600"
-                    }`}
-                  >
+                    className={`px-2 py-1 rounded text-xs ${item.status === "Completed" ? "bg-green-100 text-green-600"
+                      : "bg-red-100 text-red-600"}`} >
                     {item.status}
                   </span>
                 </td>
@@ -173,14 +154,11 @@ export default function ConversationTable() {
         </table>
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-end items-center gap-3 mt-4 flex-wrap">
         <button
           className="p-2 border rounded bg-blue-50 hover:bg-blue-100 transition disabled:opacity-50"
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          <IoChevronBack />
+          disabled={currentPage === 1} ><IoChevronBack />
         </button>
         <span className="text-sm">
           Page {currentPage} of {totalPages}

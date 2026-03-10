@@ -1,9 +1,9 @@
 
 import { useState } from "react";
-import { FiSearch, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi"; // ✅ add the chevron icons
+import { FiSearch, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 
- const orders = [
+const orders = [
   {
     id: "ORD-001",
     customer: "John Carter",
@@ -226,17 +226,15 @@ import { FiSearch, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi"; /
   },
 ];
 
-
 export default function OrdersTable() {
   const [search, setSearch] = useState("");
   const [selectedOrder, setSelectedOrder] = useState(null);
-  let [currentPage, setCurrentPage] = useState(1); // using let
+  let [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  const filteredOrders = orders.filter(
-    (order) =>
-      order.customer.toLowerCase().includes(search.toLowerCase()) ||
-      order.id.toLowerCase().includes(search.toLowerCase())
+  const filteredOrders = orders.filter((order) =>
+    order.customer.toLowerCase().includes(search.toLowerCase()) ||
+    order.id.toLowerCase().includes(search.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
@@ -258,16 +256,13 @@ export default function OrdersTable() {
   };
 
   const handlePrev = () => currentPage > 1 && setCurrentPage(currentPage - 1);
-  const handleNext = () =>
-    currentPage < totalPages && setCurrentPage(currentPage + 1);
+  const handleNext = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
 
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4">
-      {/* Orders Table */}
       <div className="flex-1 flex flex-col">
         <p className="text-gray-500 mb-4">Manage all customer orders</p>
 
-        {/* Search */}
         <div className="mb-4 flex items-center border-2 border-gray-300 rounded-lg px-3 py-2">
           <FiSearch className="text-gray-400" />
           <input
@@ -281,8 +276,6 @@ export default function OrdersTable() {
             }}
           />
         </div>
-
-        {/* Scrollable table */}
         <div className="overflow-x-auto w-full border border-gray-200 rounded-lg flex-1">
           <table className="min-w-full table-auto border-collapse text-left">
             <thead className="bg-gray-50 text-gray-500 text-sm">
@@ -297,24 +290,15 @@ export default function OrdersTable() {
             </thead>
             <tbody>
               {currentOrders.map((order, index) => (
-                <tr
-                  key={order.id}
-                  className={`border-b cursor-pointer ${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  }`}
-                  onClick={() => setSelectedOrder(order)}
-                >
+                <tr key={order.id} className={`border-b cursor-pointer ${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
+                  onClick={() => setSelectedOrder(order)}  >
                   <td className="px-4 py-3 text-sm text-gray-700">{order.id}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.customer}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.date}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.time}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{order.amount}</td>
                   <td className="px-4 py-3 text-sm">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(
-                        order.status
-                      )}`}
-                    >
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(order.status)}`} >
                       {order.status}
                     </span>
                   </td>
@@ -324,41 +308,30 @@ export default function OrdersTable() {
           </table>
         </div>
 
-        {/* Pagination - bottom right with arrows */}
         {filteredOrders.length > 0 && (
           <div className="flex justify-end mt-4 items-center gap-2">
             <button
               onClick={handlePrev}
               disabled={currentPage === 1}
-              className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
-            >
+              className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50" >
               <FiChevronLeft size={18} />
             </button>
 
-            <span className="text-gray-600 font-medium">
-              {currentPage} of {totalPages}
-            </span>
-
+            <span className="text-gray-600 font-medium"> {currentPage} of {totalPages} </span>
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages}
-              className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
-            >
+              className="p-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50" >
               <FiChevronRight size={18} />
             </button>
           </div>
         )}
       </div>
-
-      {/* Customer Info Panel */}
       {selectedOrder && (
         <div className="md:w-1/3 bg-white rounded-xl shadow-md p-5 flex flex-col">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Client</h2>
-            <FiX
-              className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800"
-              onClick={() => setSelectedOrder(null)}
-            />
+            <FiX className="cursor-pointer text-2xl text-gray-500 hover:text-gray-800" onClick={() => setSelectedOrder(null)} />
           </div>
           <p className="text-gray-700 font-medium">{selectedOrder.customer}</p>
           <p className="text-gray-500 text-sm">{selectedOrder.email}</p>
@@ -368,21 +341,13 @@ export default function OrdersTable() {
             <h3 className="font-semibold mb-1">360 Snapshot</h3>
             <p>{selectedOrder.snapshot}</p>
           </div>
-
           <div className="flex justify-between items-center mt-4">
             <span className="text-gray-500">Order Amount</span>
             <span className="text-xl font-semibold">{selectedOrder.amount}</span>
           </div>
-
           <div className="flex justify-between items-center mt-2">
             <span className="text-gray-500">Status</span>
-            <span
-              className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(
-                selectedOrder.status
-              )}`}
-            >
-              {selectedOrder.status}
-            </span>
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusClass(selectedOrder.status)}`}> {selectedOrder.status} </span>
           </div>
         </div>
       )}

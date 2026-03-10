@@ -384,159 +384,79 @@ const customers = [
     }
 ];
 
-
 export default function CustomerProfile() {
     const { id } = useParams();
     const customer = customers.find((c) => c.id === Number(id));
 
     if (!customer) {
         return (
-            <div className="p-6 text-gray-500 text-center">
-                Customer not found
-            </div>
+            <div className="p-6 text-gray-500 text-center"> Customer not found </div>
         );
     }
-
     return (
         <div className="bg-gray-50 min-h-screen p-4 space-y-8">
-
-            {/* TOP SECTION */}
             <div className="flex flex-col xl:flex-row gap-6">
-
-                {/* CUSTOMER INFO */}
                 <div className="flex-1 bg-white rounded-2xl shadow-md p-6 flex flex-col lg:flex-row gap-6">
-
-                    {/* LEFT */}
                     <div className="flex flex-col w-full lg:w-1/3 space-y-4">
-
-                        <h2 className="text-xl font-semibold text-gray-800">
-                            {customer.name}
-                        </h2>
-
-                        <p className="text-gray-500 text-sm">
-                            {customer.email}
-                        </p>
-
-                        {/* Stats */}
+                        <h2 className="text-xl font-semibold text-gray-800"> {customer.name}</h2>
+                        <p className="text-gray-500 text-sm">{customer.email}</p>
                         <div className="flex flex-col sm:flex-row gap-3 mt-2">
                             <StatCard label="Total Orders" value={customer.orders} />
                             <StatCard label="Chat Sessions" value={customer.sessions} />
                         </div>
 
                     </div>
-
-                    {/* DIVIDER + DETAILS */}
                     <div className="border-t lg:border-t-0 lg:border-l border-gray-200 pt-4 lg:pt-0 lg:pl-6 flex-1">
-
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-
-                            <Info
-                                label="Status"
-                                value={customer.status}
-                                green={customer.status === "Active"}
-                            />
-
+                            <Info label="Status"  value={customer.status} green={customer.status === "Active"}/>
                             <Info label="Member Since" value={customer.memberSince} />
-
                             <Info label="Preferred Time" value={customer.preferredTime} />
-
-                            <Info
-                                label="Loyalty Points"
-                                value={customer.loyalty}
-                                highlight
-                            />
-
+                            <Info label="Loyalty Points" value={customer.loyalty} highlight />
                             <Info label="Total Spent" value={customer.totalSpent} />
-
-                            <Info
-                                label="Preferred Assets"
-                                value={customer.preferredAssets}
-                            />
-
+                            <Info label="Preferred Assets" value={customer.preferredAssets}/>
                             <Info label="Last Visit" value={customer.lastVisit} />
-
-                            <Info
-                                label="Contact Method"
-                                value={customer.contactMethod}
-                            />
-
+                            <Info label="Contact Method"value={customer.contactMethod}/>
                             <Info label="Phone Number" value={customer.phone} />
-
                         </div>
                     </div>
                 </div>
 
-                {/* SNAPSHOT CARD */}
                 <div className="w-full xl:w-80 bg-white rounded-2xl shadow-md p-6 flex flex-col justify-between">
-
                     <div>
-                        <h3 className="font-semibold mb-3 text-gray-700">
-                            360° Customer Snapshot
-                        </h3>
-
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            {customer.name} has completed {customer.orders} orders and
-                            interacted with the chatbot {customer.sessions} times.
-                            This customer prefers communication via{" "}
-                            {customer.contactMethod}.
+                        <h3 className="font-semibold mb-3 text-gray-700"> 360° Customer Snapshot </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed"> {customer.name} has completed {customer.orders} orders and
+                            interacted with the chatbot {customer.sessions} times. This customer prefers communication via{" "} {customer.contactMethod}.
                         </p>
                     </div>
 
-                    <Link
-                        to="/snapshot"
-                        className="mt-6 text-center border border-gray-300 text-gray-700 py-2 rounded-full hover:bg-gray-100 transition"
-                    >
-                        View Details
+                    <Link to="/snapshot"
+                        className="mt-6 text-center border border-gray-300 text-gray-700 py-2 rounded-full hover:bg-gray-100 transition">View Details
                     </Link>
-
                 </div>
             </div>
-
-            {/* HISTORY HEADER */}
             <div className="space-y-1">
-                <h2 className="text-xl font-semibold text-gray-800">
-                    Customer History
-                </h2>
-
-                <p className="text-gray-500 text-sm">
-                    View conversation sessions and appointment history
-                </p>
+                <h2 className="text-xl font-semibold text-gray-800">  Customer History </h2>
+                <p className="text-gray-500 text-sm"> View conversation sessions and appointment history</p>
             </div>
-
-            {/* HISTORY TABLE */}
             <CustomerHistory />
-
         </div>
     );
 }
-
-/* ---------------- COMPONENTS ---------------- */
 
 function Info({ label, value, green, highlight }) {
     return (
         <div>
             <p className="text-gray-400 text-xs">{label}</p>
-
-            <p
-                className={
-                    green
-                        ? "text-green-600 font-medium"
-                        : highlight
-                            ? "text-indigo-600 font-semibold"
-                            : "text-gray-800 font-medium"
-                }
-            >
-                {value}
-            </p>
+            <p className={ green ? "text-green-600 font-medium" : highlight  ? "text-indigo-600 font-semibold": "text-gray-800 font-medium"}> {value} </p>
         </div>
     );
 }
 
 function StatCard({ label, value }) {
-  return (
-    <div className="w-full border border-gray-500 rounded-lg p-4 text-center bg-gray-50 hover:bg-gray-100 transition">
-      <p className="text-xl font-semibold text-gray-800">{value}</p>
-      <p className="text-sm text-gray-500">{label}</p>
-    </div>
-  );
+    return (
+        <div className="w-full border border-gray-500 rounded-lg p-4 text-center bg-gray-50 hover:bg-gray-100 transition">
+            <p className="text-xl font-semibold text-gray-800">{value}</p>
+            <p className="text-sm text-gray-500">{label}</p>
+        </div>
+    );
 }
