@@ -7,7 +7,7 @@ export default function DashboardLayout() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="flex h-screen bg-white overflow-hidden">
+    <div className="flex h-screen bg-white overflow-x-auto">
       <Sidebar />
 
       <div className="flex-1 flex flex-col">

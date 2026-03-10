@@ -285,7 +285,7 @@ export default function OrdersTable() {
                 <th className="px-4 py-3">Date</th>
                 <th className="px-4 py-3">Time</th>
                 <th className="px-4 py-3">Amount</th>
-                <th className="px-4 py-3">Status</th>
+                <th classNamez="px-4 py-3">Status</th>
               </tr>
             </thead>
             <tbody>

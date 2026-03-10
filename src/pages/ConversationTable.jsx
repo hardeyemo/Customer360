@@ -122,7 +122,7 @@ export default function ConversationTable() {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full md:w-[1000px] bg-white rounded-lg shadow-md">
+        <table className="min-w-full md:w-full bg-white rounded-lg shadow-md">
           <thead className="border-b text-gray-500 text-left text-sm">
             <tr>
               <th className="py-2 px-8 ">Date</th>
